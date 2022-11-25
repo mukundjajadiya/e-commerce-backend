@@ -5,6 +5,7 @@ services:
   auth:
     build: ./auth
     restart: always
+    image: mukundjajadiya/auth
     depends_on:
       - mongodb
     command: yarn start
@@ -19,6 +20,7 @@ services:
   # order service
   order:
     build: ./order
+    image: mukundjajadiya/order
     restart: always
     depends_on:
       - mongodb
@@ -34,6 +36,7 @@ services:
   # product service
   product:
     build: ./product
+    image: mukundjajadiya/product
     restart: always
     depends_on:
       - mongodb
@@ -50,7 +53,8 @@ services:
 
   # mongodb service
   mongodb:
-    image: mongo:latest
+    build: /mongodb
+    image: mukundjajadiya/mongodb
     restart: always
     ports:
       - "2717:27017"
