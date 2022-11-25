@@ -1,0 +1,63 @@
+version: "3"
+name: ecommerce-ms
+services:
+  # auth service
+  auth:
+    build: ./auth
+    restart: always
+    depends_on:
+      - mongodb
+    command: yarn start
+    volumes:
+      - ./auth:/app
+      - /app/node_modules
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./auth/.env
+
+  # order service
+  order:
+    build: ./order
+    restart: always
+    depends_on:
+      - mongodb
+    command: yarn start
+    volumes:
+      - ./order:/app
+      - /app/node_modules
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./order/.env
+
+  # product service
+  product:
+    build: ./product
+    restart: always
+    depends_on:
+      - mongodb
+    command: yarn start
+    volumes:
+      - ./product:/app
+      - /app/node_modules
+    ports:
+      - "8003:8003"
+    env_file:
+      - ./product/.env
+
+  # api-gateway service
+
+  # mongodb service
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "2717:27017"
+    volumes:
+      - mongodb:/data/db
+    env_file:
+      - /mongodb/.env
+
+volumes:
+  mongodb:
