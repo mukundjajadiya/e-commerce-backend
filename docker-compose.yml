@@ -49,8 +49,6 @@ services:
     env_file:
       - ./product/.env
 
-  # api-gateway service
-
   # mongodb service
   mongodb:
     build: /mongodb
@@ -62,6 +60,20 @@ services:
       - mongodb:/data/db
     env_file:
       - /mongodb/.env
+
+  # nginx (api-gateway) service
+  nginx:
+    build: /nginx
+    image: mukundjajadiya/nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "8080:8080"
+    depends_on:
+      - auth
+      - order
+      - product
+      - mongodb
 
 volumes:
   mongodb:

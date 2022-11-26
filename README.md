@@ -1,11 +1,10 @@
 # E-Commerce Microservice API
 
-- Technology
-
+- ### Technology
   - Node.js
   - Mongodb
   - Docker
-  - Nginx (Comming soon)
+  - Nginx
 
-- Tool
+- ### Tool
   - Postman
